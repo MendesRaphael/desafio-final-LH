@@ -2,6 +2,7 @@
 
 Repositório para ser utilizado no desafio para a obtenção da certificação de Analytics Engineer by Indicium. Feito o fork deste repositório e para utilizar durante o desafio para fazer a insgestão das tabelas do SAP do Adventure Works.
 
+
 [Repositório original] (https://github.com/techindicium/academy-dbt)
 
 ## Instruções
