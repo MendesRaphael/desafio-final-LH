@@ -1,34 +1,34 @@
 version: 2
 
 sources:
-  - name: adventureworks-dw-413814
-    schema: sap_adw
-    description: seeds from adventureworks database provided
-    tables:
-    # original schema person:
-    # contains objects related to names and addresses of customers, vendors, and employees
-      - name: businessentity
-        description: >
-          source of the id that connects vendors, customers, and employees with address and contact information.
-        columns:
-          - name: businessentityid
-            description: 	primary key for all customers, vendors, and employees.
-            tests:
+    - name: adventureworks-dw-413814
+      schema: sap_adw
+      description: seeds from adventureworks database provided
+      tables:
+# original schema person: 
+# contains objects related to names and addresses of customers, vendors, and employees
+        - name: businessentity
+          description: >
+            source of the id that connects vendors, customers, and employees with address and contact information.
+          columns:
+            - name: businessentityid
+              description: 	primary key for all customers, vendors, and employees.
+              tests:
+                - unique
+                - not_null
+            - name: rowguid
+              description: 	rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+              tests:
               - unique
               - not_null
-          - name: rowguid
-            description: 	rowguidcol number uniquely identifying the record. used to support a merge replication sample.
-            tests:
-              - unique
+            - name: modifieddate
+              description: date and time the record was last updated.
+              tests:
               - not_null
-          - name: modifieddate
-            description: date and time the record was last updated.
-            tests:
-              - not_null
-      - name: person
-        description: >
+        - name: person
+          description: >
             human beings involved with adventureworks: employees, customer contacts, and vendor contacts.
-        columns:
+          columns:
           - name: businessentityid
             description: >
                 primary key for person records. foreign key referencing the business entity
@@ -86,10 +86,10 @@ sources:
             description: the date and time the record was last modified
             tests:
               - not_null
-      - name: stateprovince
-        description: >
-          state and province lookup table.
-        columns:
+        - name: stateprovince
+          description: >
+            state and province lookup table.
+          columns:
           - name: stateprovinceid
             description: >
                 primary key of the state province table
@@ -128,10 +128,10 @@ sources:
             description: date and time the record was last updated.
             tests:
               - not_null
-      - name: address
-        description: >
-          street address information for customers, employees, and vendors.
-        columns:
+        - name: address
+          description: >
+            street address information for customers, employees, and vendors.
+          columns:
           - name: addressid
             description: >
                 primary key for address records
@@ -168,10 +168,10 @@ sources:
             description: date and time the record was last updated.
             tests:
               - not_null
-      - name: addresstype
-        description: >
-          types of addresses stored in the address table.
-        columns:
+        - name: addresstype
+          description: >
+            types of addresses stored in the address table.
+          columns:
           - name: addresstypeid
             description: primary key for addresstype records.
             tests:
@@ -190,10 +190,10 @@ sources:
             description: date and time the record was last updated.
             tests:
               - not_null
-      - name: businessentityaddress
-        description: >
-          cross-reference table mapping customers, vendors, and employees to their addresses.
-        columns:
+        - name: businessentityaddress
+          description: >
+            cross-reference table mapping customers, vendors, and employees to their addresses.
+          columns:
           - name: businessentityid
             description: Primary key. Foreign key to businessentity.businessentityid.
             tests:
@@ -216,10 +216,10 @@ sources:
             description: date and time the record was last updated.
             tests:
               - not_null
-      - name: businessentitycontact
-        description: >
-          cross-reference table mapping stores, vendors, and employees to people
-        columns:
+        - name: businessentitycontact
+          description: >
+            cross-reference table mapping stores, vendors, and employees to people
+          columns:
           - name: businessentityid
             description: primary key. foreign key to businessentity.businessentityid.
             tests:
@@ -241,10 +241,10 @@ sources:
             description: date and time the record was last updated.
             tests:
               - not_null
-      - name: contacttype
-        description: >
-          lookup table containing the types of business entity contacts.
-        columns:
+        - name: contacttype
+          description: >
+            lookup table containing the types of business entity contacts.
+          columns:
           - name: contacttypeid
             description: primary key for contacttype records.
             tests:
@@ -258,10 +258,10 @@ sources:
             description: date and time the record was last updated.
             tests:
               - not_null
-      - name: emailaddress
-        description: >
-          information about email addresses associated with business entities. where to send a person email.
-        columns:
+        - name: emailaddress
+          description: >
+            information about email addresses associated with business entities. where to send a person email.
+          columns:
           - name: businessentityid
             description: primary key. person associated with this email address. foreign key to person.businessentityid
             tests:
@@ -282,10 +282,10 @@ sources:
             description: 	date and time the record was last updated.
             tests:
               - not_null
-      - name: countryregion
-        description: >
-          lookup table containing the iso standard codes for countries and regions..
-        columns:
+        - name: countryregion
+          description: >
+            lookup table containing the iso standard codes for countries and regions..
+          columns:
           - name: countryregioncode
             description: iso standard code for countries and regions.
             tests:
