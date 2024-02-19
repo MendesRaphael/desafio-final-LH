@@ -1,0 +1,300 @@
+version: 2
+
+sources:
+  - name: adventureworks-dw-413814
+    schema: sap_adw
+    description: seeds from adventureworks database provided
+    tables:
+    # original schema person:
+    # contains objects related to names and addresses of customers, vendors, and employees
+      - name: businessentity
+        description: >
+          source of the id that connects vendors, customers, and employees with address and contact information.
+        columns:
+          - name: businessentityid
+            description: 	primary key for all customers, vendors, and employees.
+            tests:
+              - unique
+              - not_null
+          - name: rowguid
+            description: 	rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: date and time the record was last updated.
+            tests:
+              - not_null
+      - name: person
+        description: >
+            human beings involved with adventureworks: employees, customer contacts, and vendor contacts.
+        columns:
+          - name: businessentityid
+            description: >
+                primary key for person records. foreign key referencing the business entity
+            tests:
+              - not_null
+          - name: persontype
+            description: |
+              primary type of person: 
+              * SC = store contact
+              * IN = individual (retail) customer 
+              * SP = sales person
+              * EM = employee (non-sales) 
+              * VC = vendor contact
+              * GC = general contact
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['SC', 'IN', 'SP', 'EM', 'VC', 'GC']
+          - name: namestyle
+            description: |	
+              * 0 = the data in firstname and lastname are stored in western style (first name, last name) order. 
+              * 1 = eastern style (last name, first name) order.
+          - name: title
+            description: 	a courtesy title. for example, mr. or ms.
+          - name: firstname
+            description: the first name of the person
+            tests:
+              - not_null
+          - name: middlename
+            description: the middle name of the person
+          - name: lastname
+            description: the last name of the person
+            tests:
+              - not_null
+          - name: suffix
+            description: surname suffix. for example, sr. or jr.
+          - name: emailpromotion
+            description: |
+              * 0 = contact does not wish to receive e-mail promotions 
+              * 1 = contact does wish to receive e-mail promotions from adventureworks
+              * 2 = contact does wish to receive e-mail promotions from adventureworks and selected partners.
+            tests:
+              - not_null
+          - name: additionalcontactinfo
+            description: additional contact information in xml format
+          - name: demographics
+            description: personal information such as hobbies, and income collected from online shoppers. used for sales analysis.
+          - name: rowguid
+            description: >
+                rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: the date and time the record was last modified
+            tests:
+              - not_null
+      - name: stateprovince
+        description: >
+          state and province lookup table.
+        columns:
+          - name: stateprovinceid
+            description: >
+                primary key of the state province table
+            tests:
+              - unique
+              - not_null
+          - name: stateprovincecode
+            description: iso standard state or province code
+            tests:
+              - not_null
+          - name: countryregioncode
+            description: >
+                iso standard country or region code. foreign key to countryregion.countryregioncode.
+            tests:
+              - not_null
+          - name: isonlystateprovinceflag
+            description: |
+              *0 = stateprovincecode exists. 
+              *1 = stateprovincecode unavailable, using countryregioncode.
+            tests:
+              - not_null
+          - name: name
+            description: the name of the state or province
+            tests:
+              - not_null
+          - name: territoryid
+            description: id of the territory in which the state or province is located. foreign key to salesterritory.salesterritoryid.
+            tests:
+              - not_null
+          - name: rowguid
+            description: rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: date and time the record was last updated.
+            tests:
+              - not_null
+      - name: address
+        description: >
+          street address information for customers, employees, and vendors.
+        columns:
+          - name: addressid
+            description: >
+                primary key for address records
+            tests:
+              - unique
+              - not_null
+          - name: addressline1
+            description: the first line of the address
+            tests:
+              - not_null
+          - name: addressline2
+            description: the second line of the address
+          - name: city
+            description: the city where the address is located
+            tests:
+              - not_null
+          - name: stateprovinceid
+            description: >
+                unique identification number for the state or province. foreign key to stateprovince table.
+            tests:
+              - not_null
+          - name: postalcode
+            description: the postal code of the address
+            tests:
+              - not_null
+          - name: spatiallocation
+            description: latitude and longitude of this address.
+          - name: rowguid
+            description: rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: date and time the record was last updated.
+            tests:
+              - not_null
+      - name: addresstype
+        description: >
+          types of addresses stored in the address table.
+        columns:
+          - name: addresstypeid
+            description: primary key for addresstype records.
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: address type description. for example, billing, home, or shipping.
+            tests:
+              - not_null
+          - name: rowguid
+            description: rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: date and time the record was last updated.
+            tests:
+              - not_null
+      - name: businessentityaddress
+        description: >
+          cross-reference table mapping customers, vendors, and employees to their addresses.
+        columns:
+          - name: businessentityid
+            description: Primary key. Foreign key to businessentity.businessentityid.
+            tests:
+              - not_null
+          - name: addressid
+            description: >
+                primary key. foreign key to address.addressid.
+            tests:
+              - not_null
+          - name: addresstypeid
+            description: primary key. foreign key to addresstype.addresstypeid.
+            tests:
+              - not_null
+          - name: rowguid
+            description: rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: date and time the record was last updated.
+            tests:
+              - not_null
+      - name: businessentitycontact
+        description: >
+          cross-reference table mapping stores, vendors, and employees to people
+        columns:
+          - name: businessentityid
+            description: primary key. foreign key to businessentity.businessentityid.
+            tests:
+              - not_null
+          - name: personid
+            description: primary key. foreign key to person.businessentityid.
+            tests:
+              - not_null
+          - name: contacttypeid
+            description: primary key. foreign key to contacttype.contacttypeid.
+            tests:
+              - not_null
+          - name: rowguid
+            description: rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: date and time the record was last updated.
+            tests:
+              - not_null
+      - name: contacttype
+        description: >
+          lookup table containing the types of business entity contacts.
+        columns:
+          - name: contacttypeid
+            description: primary key for contacttype records.
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: contact type description.
+            tests:
+              - not_null
+          - name: modifieddate
+            description: date and time the record was last updated.
+            tests:
+              - not_null
+      - name: emailaddress
+        description: >
+          information about email addresses associated with business entities. where to send a person email.
+        columns:
+          - name: businessentityid
+            description: primary key. person associated with this email address. foreign key to person.businessentityid
+            tests:
+              - not_null
+          - name: emailaddressid
+            description: primary key. id of this email address.
+            tests:
+              - unique
+              - not_null
+          - name: emailaddress
+            description: the email address
+          - name: rowguid
+            description: rowguidcol number uniquely identifying the record. used to support a merge replication sample.
+            tests:
+              - unique
+              - not_null
+          - name: modifieddate
+            description: 	date and time the record was last updated.
+            tests:
+              - not_null
+      - name: countryregion
+        description: >
+          lookup table containing the iso standard codes for countries and regions..
+        columns:
+          - name: countryregioncode
+            description: iso standard code for countries and regions.
+            tests:
+              - not_null
+          - name: name
+            description: 	country or region name.
+            tests:
+              - not_null
+          - name: modifieddate
+            description: 	date and time the record was last updated.
+            tests:
+              - not_null
