@@ -1,0 +1,83 @@
+version: 2
+
+sources:
+    - name: adventureworks-dw-413814
+      schema: sap_adw
+      description: seeds from adventureworks database provided
+      tables:
+# original schema person: 
+# contains objects related to names and addresses of customers, vendors, and employees
+        - name: businessentity
+        - name: person
+        - name: stateprovince
+        - name: address
+        - name: addresstype
+        - name: businessentityaddress
+        - name: businessentitycontact
+        - name: contacttype
+        - name: emailaddress
+        - name: countryregion
+
+# original schema sales: 
+# contains objects related to customers, sales orders, and sales territories
+        - name: countryregioncurrency
+        - name: creditcard
+        - name: currency
+        - name: currencyrate
+        - name: customer
+        - name: personcreditcard
+        - name: salesorderdetail
+        - name: salesorderheader
+        - name: salesorderheadersalesreason
+        - name: salesperson
+        - name: salespersonquotahistory
+        - name: salesreason
+        - name: salestaxrate
+        - name: salesterritory
+        - name: salesterritoryhistory
+        - name: shoppingcartitem
+        - name: specialoffer
+        - name: specialofferproduct
+        - name: store
+
+# original schema production:
+# Contains objects related to products, inventory, and manufacturing
+        - name: billofmaterials
+        - name: culture
+        - name: document
+        - name: illustration
+        - name: location
+        - name: product
+        - name: productcategory
+        - name: productcosthistory
+        - name: productdescription
+        - name: productdocument
+        - name: productinventory
+        - name: productlistpricehistory
+        - name: productmodel
+        - name: productmodelillustration
+        - name: productmodelproductdescriptionculture
+        - name: productphoto
+        - name: productproductphoto
+        - name: productreview
+        - name: productsubcategory
+        - name: scrapreason
+        - name: transactionhistory
+        - name: transactionhistoryarchive
+        - name: unitmeasure
+        - name: workorder
+        - name: workorderrouting
+
+
+# original schema purchasing:
+# Contains objects related to vendors and purchase orders
+        - name: productvendor
+        - name: purchaseorderdetail
+        - name: purchaseorderheader
+        - name: shipmethod
+        - name: vendor
+        
+        
+        
+        - name: employee
+

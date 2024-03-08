@@ -1,0 +1,388 @@
+version: 2
+
+models:
+  - name: fct_sales
+    columns:
+      - name: id_sales_order
+        description: The primary key of the sale
+
+      - name: id_sales_order_detail
+        description: The primary key of the sale detail
+          - unique
+
+      - name: id_territory
+        description: The foreign key of territory
+
+      - name: id_ship_to_address
+        description: The foreign key of the shiptoadress
+
+      - name: creditcard_fk
+        description: The foreign key of the creditcard. If no creditcard exists, it was assumed that purchase was made in cash.
+
+      - name: unitprice
+        description: The unit price of the product
+
+      - name: orderqty
+        description: The quantity of the product
+
+      - name: reason_name_final
+        description: The reason attributed to the sale
+
+      - name: orderdate
+        description: The date order to the sale
+
+      - name: order_status_name
+        description: The order's status name.
+
+      - name: id_sales_reason
+        description: The foreign key of the sales reason.
+
+      - name: id_currency_rate
+        description: The id the currency rate.
+
+      - name: sub_total
+        description: The Total minus shipping
+
+      - name: total_due
+        description: The total order.
+
+      - name: tax_amount
+        description: The tax amount.
+
+      - name: freight
+        description: The freight.
+
+      - name: order_qty
+        description: The quantity of the product
+
+      - name: unit_price
+        description: The unit price of the product.
+
+      - name: order_date
+        description: The date order.
+
+      - name: ds_discount_type
+        description: The discount of the type.
+
+      - name: ds_territory
+        description: The name of territory.
+
+      - name: cd_country_region
+        description: The code country region.
+
+      - name: group_territory
+        description: The group territory
+
+      - name: sale_sytd
+        description: The sales this year.
+
+      - name: cost_ytd
+        description: The cost this year.
+
+      - name: cost_last_year
+        description: The cost last year.
+
+      - name: name_full_sales_person
+        description: The full name of the seller.
+
+      - name: person_type
+        description: The person seller type.
+
+      - name: birth_date
+        description: The date birth.
+
+      - name: hire_date
+        description: The date birth.
+
+      - name: salaried_flag
+        description: The flag salaried.
+
+      - name: gender
+        description: The gender.
+
+      - name: marital_status
+        description: The status marital.
+
+      - name: reason_name
+        description: The name reason for seller
+
+      - name: reason_type
+        description: The type reason for seller
+
+      - name: id_product
+        description: The foreign key of product.
+
+      - name: id_product_model
+        description: The id product model
+
+      - name: name_product
+        description: The name product.
+
+      - name: number_product
+        description: The number product.
+
+      - name: color
+        description: The color of the product.
+
+      - name: standard_cost
+        description: The price cost standard.
+
+      - name: price_list
+        description: The price list.
+
+      - name: start_sell_date
+        description: The start sell
+
+      - name: end_sell_date
+        description: The end sell.
+
+      - name: id_product_sub_category
+        description: The id sub category
+
+      - name: id_product_category
+        description: the id category.
+
+      - name: ds_sub_category
+        description: The name sub category of the product
+
+      - name: name_category
+        description: The name category of the product
+
+      - name: id_customer
+        description: The name sub category od the product
+
+      - name: id_person
+        description: The foreign key of person.
+
+      - name: id_store
+        description: The foreign key of store.
+
+      - name: store_name
+        description: The name store.
+
+      - name: name_full_customer
+        description: The full customer.
+
+      - name: id_credit_card
+        description: The foreign key of credit card..
+
+      - name: card_type
+        description: The type credit card.
+
+      - name: expired_year
+        description: The expired credit card year.
+
+      - name: expired_month
+        description: The expired credit card month.
+
+      - name: id_address
+        description: The foreign key at address.
+
+      - name: city
+        description: The city of the client.
+
+      - name: postal_code
+        description: The postal code.
+
+      - name: id_state_province
+        description: The foreign key state province.
+
+      - name: ds_state
+        description: The state name.
+
+      - name: cd_state_province
+        description: The code of province.
+  - name: dim_sales_territory
+    columns:
+      - name: id_territory
+        description: The primary key
+        tests:
+          - not_null   
+          - unique    
+      - name: ds_territory
+        description: The name of territory
+      - name: cd_country_region
+        description: The code country region 
+      - name: group_territory
+        description: The territory group
+      - name: sale_sytd
+        description: The sales from the beginning of the year
+      - name: cost_ytd
+        description: The cost from the beginning of the year
+      - name: cost_last_year
+        description: The cost last year
+      - name: txt_row_guid
+        description: The row guid
+      - name: dt_modified
+        description: The modified date
+  - name: dim_sales_person
+    columns:
+      - name: id_sales_person
+        description: The primary key
+        tests:
+          - not_null   
+          - unique
+      - name: id_territory
+        description: The ID territory is foreigner key 
+      - name: sales_quota
+        description: The quota of sales
+      - name: bonus
+        description: The bonus 
+      - name: commission_pct
+        description: The commission
+      - name: sales_ytd
+        description: The sales from the beginning of the year until today
+      - name: sales_last_year
+        description: The sales last year
+      - name: txt_row_guid
+        description: the row guid
+      - name: dt_modified
+        description: The dt_modified
+      - name: id_nacional_number
+        description: The number Id nacional sales
+      - name: first_name
+        description: The first name
+      - name: last_name
+        description: The last name
+      - name: full_name
+        description: The full name
+      - name: person_type
+        description: The type person
+      - name: birth_date
+        description: The birth date
+      - name: hire_date
+        description: The hire date
+      - name: salaried_flag
+        description: The salaried flag
+      - name: sick_leave_hours
+        description: The sick leave hours
+      - name: current_flag
+        description: The current flag 
+      - name: vacation_hours
+        description: The vacation hours
+      - name: gender
+        description: The gender
+  - name: dim_products
+    columns:
+      - name: id_product 
+        description: The id_customer the primary key
+        tests:
+          - not_null   
+          - unique
+      - name: id_product_model 
+        describle: The ID model product
+      - name: name_product
+        describle: The name product
+      - name: number_product
+        describle: The number of product
+      - name: make_flag
+        describle: The flag product made
+      - name: finished_goods_flag
+        describle: Flag that product has been finished
+      - name: color
+        describle: The color que product
+      - name: safety_stock_level
+        describle: The level stock safety
+      - name: reorder_point
+        describle: The stock point
+      - name: standard_cost
+        describle: The cost standard
+      - name: price_list
+        describle: The list price
+      - name: number_size
+        describle: The number size
+      - name: unit_mesure
+        describle: The unit mesure
+      - name: weigh_unit_mensure
+        describle: The unit mesure weigh
+      - name: weight
+        describle: The weigh
+      - name: days_to_manufacture
+        describle: The days to manufacture
+      - name: product_line
+        describle: The product line
+      - name: class
+        describle: The class product
+      - name: style
+        describle: The style of product
+      - name: start_sell_date
+        describle: The start of the sale date
+      - name: end_sell_date
+        describle: The end of the sale date
+      - name: txt_row_guid
+        describle: the row guid
+      - name: dt_modified
+        describle: The date of the modified date
+      - name: id_product_sub_category
+        describle: The Id of  sub category of product
+      - name: id_product_category
+        describle: The Id of category of product
+      - name: ds_sub_category
+        describle: The name of sub category
+      - name: name_category
+        describle: The name of category
+  - name: dim_customer
+    columns:
+      - name: id_customer
+        description: The id_customer the primary key
+        tests:
+          - not_null   
+          - unique
+      - name: id_person
+        description: The number of customer
+      - name: id_store
+        description: the ID store
+      - name: id_territory
+        description: the id territory
+      - name: store_name
+        description: The name of the store
+      - name: title
+        description: the title of the customer
+      - name: full_name
+        description: The full name customer
+  - name: dim_reason
+    columns:
+      - name: id_sales_reason
+        description: The primary key
+        tests:
+          - not_null   
+          - unique
+      - name: reason_name
+        description: The name reason
+      - name: reason_type
+        description: The type reason
+      - name: dt_modified
+        description: The modified date 
+  - name: dim_credit_card
+    columns:
+      - name: id_credit_card
+        description: The id_credit_card of the primary key
+        tests:
+          - not_null   
+          - unique
+      
+      - name: card_type
+        description: The credit card type for customer
+      
+      - name: expired_year
+        description: The credit card year expired for customer
+      
+      - name: expired_month
+        description: The credit card year expired for customer
+      
+      - name: card_number
+        description: The number credit card for customer
+      
+      - name: dt_modified
+        description: The last modified date
+
+
+
+
+
+
+  
+
+
+
+
